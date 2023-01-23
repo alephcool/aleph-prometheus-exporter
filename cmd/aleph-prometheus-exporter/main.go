@@ -3,12 +3,13 @@ package main
 import (
 	"flag"
 	"fmt"
-	"aleph-exporter/pkg/observe"
-	"aleph-exporter/pkg/web"
+	"aleph-prometheus-exporter/pkg/observe"
+	"aleph-prometheus-exporter/pkg/web"
 	"github.com/facebookgo/grace/gracehttp"
 	"net/http"
 	"os"
 	"time"
+	_ "github.com/google/subcommands"
 )
 
 var (
@@ -36,7 +37,7 @@ func main() {
 		WriteTimeout: 0,
 	}
 
-	fmt.Printf("aleph exporter started. Listening on %s and exposing api from %s \n\n", *port, alephUrl(*alephHost))
+	fmt.Printf("aleph-prometheus-exporter started. Listening on %s and exposing api from %s \n\n", *port, alephUrl(*alephHost))
 	go func() {
 		for {
 			err,requestBody := observe.GetAlephStatus(alephUrl(*alephHost), *alephToken, true)
